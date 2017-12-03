@@ -1,0 +1,148 @@
+<link rel="import" href="/static/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/static/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/static/sequence-diagram.html">
+<link rel="import" href="/static/call-tree.html">
+<link rel="import" href="/static/src-code.html">
+
+
+<dom-module id="callspect-viewer">
+  <template>
+    <style>
+
+      :host {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        height: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+
+      .row {
+        display:flex;
+        flex-direction: row;
+      }
+
+      div.vertical {
+        flex: 0 0 100%;
+        max-height: 50%;
+        min-height: 50%;
+        max-width: 100%;
+        border-bottom: 1px solid gray;
+        overflow: auto;
+        box-sizing: border-box;
+      }
+
+      div.horizontal {
+        flex: 0 0 100%;
+        max-width: 50%;
+        min-width: 50%;
+        border-right: 1px solid gray;
+        padding: .5em;
+        overflow: auto;
+        box-sizing: border-box;
+      }
+
+    </style>
+
+    <div class="vertical row">
+      <div class="horizontal">
+        <h3> Call tree: </h3>
+        <call-tree id="call-tree" on-item-selected="itemSelected"></call-tree>
+      </div>
+      <div class="horizontal">
+        <src-code id="src-code"></src-code>
+      </div>
+    </div>
+    <div class="vertical">
+      <h3> Call flow: </h3>
+      <sequence-diagram id="sequence-diagram"></sequence-diagram>
+    </div>
+
+    <iron-ajax
+        id="call-tree-feeder"
+        url="{{dataUrl}}"
+        params=""
+        handle-as="json"
+        on-response="updateCallTree"
+        debounce-duration="300"></iron-ajax>
+    <iron-ajax
+        id="seqDiagFeeder"
+        url="{{seqDiagUrl}}"
+        params=""
+        handle-as="json"
+        on-response="updateSeqDiag"
+        debounce-duration="1000"></iron-ajax>
+    <iron-ajax
+        id="src-code-feeder"
+        url="{{srcCodeUrl}}"
+        params=""
+        handle-as="json"
+        on-response="updateSrcCode"
+        debounce-duration="300"></iron-ajax>
+
+  </template>
+
+  <script>
+    class CallspectViewer extends Polymer.Element {
+
+      static get is() { return "callspect-viewer" }
+
+      static get properties() {
+        return {
+          dataUrl: {
+            type: String
+          },
+          seqDiagUrl: {
+            type: String
+          },
+          srcCodeUrl: {
+            type: String
+          }
+        };
+      }
+
+      itemSelected(evt, callee) {
+        this.requestSeqDiagData(evt.detail.item);
+        this.requestSrcCode(evt.detail.item);
+      }
+
+      requestSeqDiagData(actorId) {
+        this.$['seqDiagFeeder'].params = {"actor": actorId};
+        this.$['seqDiagFeeder'].generateRequest();
+      }
+
+      requestSrcCode(actorId) {
+        this.$['src-code-feeder'].params = {"actor": actorId};
+        this.$['src-code-feeder'].generateRequest();
+      }
+
+      updateCallTree(evt) {
+        let data = evt.target.lastResponse.data;
+        this.$["call-tree"].update(data.callTree);
+      }
+
+      updateSeqDiag(evt) {
+        let seqText = evt.target.lastResponse.data;
+        this.$["sequence-diagram"].update(seqText);
+      }
+
+      updateSrcCode(evt) {
+        let data = evt.target.lastResponse.data;
+        this.$["src-code"].update(
+            data.filePath, data.fileContent, data.lineNumber, data.fileType
+        );
+
+      }
+
+      ready() {
+        super.ready();
+        this.$['call-tree-feeder'].generateRequest();
+      }
+
+    }
+    customElements.define(CallspectViewer.is, CallspectViewer);
+  </script>
+</dom-module>
+

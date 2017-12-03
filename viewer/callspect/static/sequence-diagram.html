@@ -1,0 +1,47 @@
+<link rel="import" href="/static/bower_components/polymer/polymer-element.html">
+
+<!--
+  TODO: they should be seperate elements, more like:
+<link rel="import" href="/static/bower_components/bower-webfontloader/webfont.js">
+<link rel="import" href="/static/bower_components/snap.svg/dist/snap.svg-min.js">
+<link rel="import" href="/static/bower_components/snap.svg/dist/snap.svg-min.js">
+<link rel="import" href="/static/bower_components/underscore/underscore-min.js">
+<link rel="import" href="/static/bower_components/js-sequence-diagrams/dist/sequence-diagram-min.js">
+-->
+<script src="/static/bower_components/bower-webfontloader/webfont.js"></script>
+<script src="/static/bower_components/snap.svg/dist/snap.svg-min.js"></script>
+<script src="/static/bower_components/snap.svg/dist/snap.svg-min.js"></script>
+<script src="/static/bower_components/underscore/underscore-min.js"></script>
+<script src="/static/bower_components/js-sequence-diagrams/dist/sequence-diagram-min.js"></script>
+
+<dom-module id="sequence-diagram">
+  <template>
+    <style>
+
+      :host {
+        display: block;
+      }
+
+    </style>
+
+    <div id="diagram"></div>
+
+  </template>
+
+  <script>
+    class SequenceDiagram extends Polymer.Element {
+
+      static get is() { return 'sequence-diagram' }
+
+      update(sequenceData) {
+        this.$.diagram.innerHTML = '';
+        var d = Diagram.parse(sequenceData);
+        var options = {theme: 'simple'};
+        d.drawSVG(this.$.diagram, options);
+      }
+
+    }
+    customElements.define(SequenceDiagram.is, SequenceDiagram);
+  </script>
+</dom-module>
+

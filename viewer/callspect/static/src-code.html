@@ -1,0 +1,91 @@
+<link rel="import" href="/static/bower_components/polymer/polymer-element.html">
+
+<!-- TODO prism-highlighter is only installed to use its theme, this should be
+  handled in future to remove this dependency.
+  Beside that, usage off prism-highlighter is odd.
+  Default syntax is only for css, html, any few other (no python)
+  I have no idea how to inject plugins like line-numbering.
+-->
+
+<script src="/static/node_modules/prismjs/prism.js" data-manual></script>
+<link rel="import" href="/static/prism-theme-default.html">
+<script src="/static/node_modules/prismjs/components/prism-python.min.js"></script>
+
+<script src="/static/node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js"></script>
+<link rel="import" href="/static/prism-line-numbers.css.html">
+<script src="/static/node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js"></script>
+<link rel="import" href="/static/prism-line-highlight.css.html">
+
+
+<dom-module id="src-code">
+  <template>
+    <style include="prism-theme-default prism-line-numbers line-highlight">
+
+      :host {
+        display: block;
+      }
+
+      /*
+      bug: https://github.com/PrismJS/prism/issues/1234#issuecomment-347687762
+      TODO: fix it better way then this 24px
+      */
+      pre {
+        line-height: 24px;
+      }
+
+    </style>
+
+    <!-- TODO: app-header -->
+    <h3> Source code: </h3>
+    <p>{{filePath}}</p>
+    <pre class="line-numbers"><code id="formatted-src"></code></pre>
+
+  </template>
+
+  <script>
+    class SrcCode extends Polymer.Element {
+
+      static get is() { return "src-code" }
+
+      static get properties() {
+        return {
+          lang: {
+            type: String
+          },
+          filePath: {
+            type: String
+          }
+        }
+      }
+
+      scrollToLine(lineNumber, option) {
+        var _option = option || {block: "center"};
+        let elem = this.$['formatted-src'].querySelector('.line-numbers-rows').children[lineNumber];
+        elem.scrollIntoView(_option);
+      }
+
+      update(filePath, code, lineNumber, lang, actorId) {
+        if (!code) {
+          return
+        }
+        this.filePath = filePath;
+        this.shadowRoot.querySelector('pre').setAttribute('data-line', lineNumber);
+        var myNode = this.shadowRoot.querySelector('code');
+        var shadow = this.shadowRoot.querySelector('.line-highlight')
+        if (shadow) {
+          shadow.remove();
+        }
+        var html = Prism.highlight(code, Prism.languages[lang]);
+        this.$['formatted-src'].innerHTML = html
+        Prism.hooks.run('complete', {
+          code: html,
+          element: myNode
+        });
+        this.scrollToLine(lineNumber);
+      }
+    }
+
+    customElements.define(SrcCode.is, SrcCode);
+  </script>
+</dom-module>
+
