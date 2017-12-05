@@ -19,7 +19,7 @@ setup(
     maintainer="xliiv",
     maintainer_email="tymoteusz.jankowski@gmail.com",
     url="https://github.com/xliiv/callspect",
-    python_requires='>=3.6',
+    python_requires='>=3.5',
     packages=['callspectpy', 'examples'],
     py_modules=["callspectpy_cli"],
     entry_points={

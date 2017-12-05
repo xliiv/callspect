@@ -19,15 +19,18 @@ setup(
     maintainer="xliiv",
     maintainer_email="tymoteusz.jankowski@gmail.com",
     url="https://github.com/xliiv/callspect",
-    packages=['callspect'],
+    python_requires='>=3.5',
     install_requires=[
         'Flask==0.12.2',
     ],
+    packages=['callspect'],
+    py_modules=['callspect_cli'],
     entry_points={
         'console_scripts': [
             'callspect = callspect_cli:run',
         ],
     },
+    include_package_data=True,
     classifiers=[
       'Programming Language :: Python :: 3',
     ]
