@@ -11,7 +11,6 @@ $ callspect ~/path-to-my-file/callspect.txt
 
 def run():
     if len(sys.argv) != 2:
-        print("Missing system variable CALLSPECT_DATA_PATH")
         print(USAGE)
         sys.exit(1)
 
