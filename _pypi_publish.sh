@@ -11,10 +11,10 @@ pip install wheel
 # callspectpy
 cd collector/
 python setup.py sdist bdist_wheel
-twine upload --user $TWINE_USERNAME --repository-url $TWINE_REPOSITORY_URL dist/*
+#twine upload --user $TWINE_USERNAME --repository-url $TWINE_REPOSITORY_URL dist/*
 cd -
 
 # callspect
 cd viewer/
-twine upload --user $TWINE_USERNAME --repository-url $TWINE_REPOSITORY_URL dist/*
+#twine upload --user $TWINE_USERNAME --repository-url $TWINE_REPOSITORY_URL dist/*
 cd -
