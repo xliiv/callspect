@@ -1,10 +1,13 @@
 sudo: true
 language: python
-before_script:
+python:
+  - "3.5"
+  - "3.6"
+before_install:
+- sudo apt install p7zip-full
 #- npm install -g bower
 #- bower install
 #- cd callspect/
-- sudo apt install p7zip-full
 cache:
 - pip
 install:
