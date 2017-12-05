@@ -19,12 +19,15 @@ setup(
     maintainer="xliiv",
     maintainer_email="tymoteusz.jankowski@gmail.com",
     url="https://github.com/xliiv/callspect",
-    packages=['callspectpy'],
+    python_requires='>=3.6',
+    packages=['callspectpy', 'examples'],
+    py_modules=["callspectpy_cli"],
     entry_points={
         'console_scripts': [
             'callspectpy = callspectpy_cli:run',
         ],
     },
+    include_package_data=True,
     classifiers=[
       'Programming Language :: Python :: 3',
     ]
