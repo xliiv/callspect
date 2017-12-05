@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-TWINE_REPOSITORY_URL="https://test.pypi.org/legacy/"
-TWINE_USERNAME="xliiv"
+TWINE_REPOSITORY_URL=${TWINE_REPOSITORY_URL:="https://upload.pypi.org/legacy/"}
+TWINE_USERNAME=${TWINE_USERNAME:="xliiv"}
 
 pip install twine
 pip install wheel
