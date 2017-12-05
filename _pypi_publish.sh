@@ -16,5 +16,6 @@ cd -
 
 # callspect
 cd viewer/
+python setup.py sdist bdist_wheel
 twine upload --user $TWINE_USERNAME --repository-url $TWINE_REPOSITORY_URL dist/*
 cd -

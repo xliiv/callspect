@@ -1,7 +1,6 @@
 sudo: true
 language: python
 python:
-  - "3.5"
   - "3.6"
 before_install:
 - sudo apt install p7zip-full
