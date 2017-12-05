@@ -150,7 +150,7 @@ class FormatterJsonTest(unittest.TestCase):
 
         self.assertEqual(
             jsonable,
-            {'call_args': "{'obj': <_io.BufferedRandom name=3>}"}
+            {'call_args': "{{'obj': <_io.BufferedRandom name={}>}}".format(fp.name)}
         )
 
     def test_data_is_jsoned_if_key_is_tuple(self):
@@ -160,7 +160,6 @@ class FormatterJsonTest(unittest.TestCase):
 
         jsonable = self.formatter.make_jsonable(data_dict)
 
-        print(jsonable)
         self.assertEqual(jsonable, {'call_args': "{(1, 2): '1,2'}"})
 
 
