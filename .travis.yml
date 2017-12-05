@@ -17,6 +17,7 @@ deploy:
   skip_cleanup: true
   provider: script
   script: ./_pypi_publish.sh
+  script: chmod +x ./_pypi_publish.sh && ./_pypi_publish.sh
   #on:
   #  tags: true
   #  branch: master
