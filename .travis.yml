@@ -4,19 +4,19 @@ python:
   - "3.5"
   - "3.6"
 before_install:
-- sudo apt install p7zip-full
-cache:
-- pip
-install:
-- pip install -e collector
-- pip install -e viewer
-- 7z x -oviewer/callspect/static/ viewer/callspect/static/deps.7z
-script:
-- python collector/tests.py && python viewer/tests.py
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: _pypi_publish.sh
-  on:
-    tags: true
-    branch: master
+- ls -la
+#cache:
+#- pip
+#install:
+#- pip install -e collector
+#- pip install -e viewer
+#- 7z x -oviewer/callspect/static/ viewer/callspect/static/deps.7z
+#script:
+#- python collector/tests.py && python viewer/tests.py
+#deploy:
+#  skip_cleanup: true
+#  provider: script
+#  script: _pypi_publish.sh
+#  #on:
+#  #  tags: true
+#  #  branch: master
