@@ -1,0 +1,10 @@
+include README.md
+include callspect/static/*.html
+include callspect/static/node_modules/prismjs/prism.js
+include callspect/static/node_modules/prismjs/components/prism-python.min.js
+include callspect/static/node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js
+include callspect/static/node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js
+recursive-include callspect/templates/ *.html
+recursive-include callspect/static/vendor/ *.*
+recursive-include callspect/static/bower_components *.html
+recursive-include callspect/static/bower_components *.js
