@@ -1,0 +1,24 @@
+sudo: true
+language: python
+before_script:
+#- npm install -g bower
+#- bower install
+#- cd callspect/
+- sudo apt install p7zip-full
+cache:
+- pip
+install:
+- pip install -e collector
+- pip install -e viewer
+- 7z x -oviewer/callspect/static/ viewer/callspect/static/deps.7z
+script:
+- python collector/tests.py && python viewer/tests.py
+#deploy:
+#  provider: pypi
+#  user: xliiv
+#  password:
+#    secure: OOOzxlmcEQ+Row2s26DOtXx/BbD0WosMyo3+XB5HEaAhlySIaeFytuRJQnRUal7CFBQpEPcbYxHaI73PZo5J9SFc0G2NCLqW8r8FzJintJwFW/XLyTlbvRD652EoeBzmixX3+3/Xkeef6bR7BD82Z8omINpBHOEOisaxo9pqeSGhD0N8YJGIdHrHW7oIkGmcIRgs6DoCpAPqUGoR9hqG9xhy0o7x01+NnQxy2LjqHWv+aO6QQEEyU4f9RcamU7gr2FwcCpZrKZ8Kyabg+Vb7mzaSusTgMTd/nK2ULwDYaQCVd46SmzfXi/zCEkuTho6V7TP8aod+BhNSnUh1nP6D9ULMnWqAanQlRWRVD5aDaCdXjar62pnGHkuupMdr1pkif6phNBgmr1b0IzJ+bIJ6IypC9SriQc5F7vgfAKqzVR2qTT5PToyJQCq8EzwuWai2KpV5qMbYonLOOU39BwSHdER/n6PZq95XeRXH9sb4pCNy/eaEKZ9L/S+aHSKagORPAxeKqkJiWi25QuXugy+Q+HFHhvoApbib6tLWkWZ/DSVEOuSR90GTGg5aq6tywvDquMRSCzBWizm5yacKXxq/CX4krDL30yZuJ6GBsiQG0f5APV1wWv8bkgVV3DVMdaJR0/xHvM75tfMG4KnzCBNYm6idUBJ4bB6HC6/ffixzNOs=
+#  distributions: sdist bdist_wheel
+#  on:
+#    tags: true
+#    branch: master
