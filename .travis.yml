@@ -7,11 +7,13 @@ before_install:
 - ls -la
 #cache:
 #- pip
-#install:
+install:
+- echo 'install'
 #- pip install -e collector
 #- pip install -e viewer
 #- 7z x -oviewer/callspect/static/ viewer/callspect/static/deps.7z
-#script:
+script:
+- echo 'script'
 #- python collector/tests.py && python viewer/tests.py
 deploy:
   skip_cleanup: true
