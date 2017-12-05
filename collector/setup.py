@@ -13,7 +13,7 @@ setup(
     description="Collects execution data from python script",
     long_description=long_description,
     license="MIT",
-    version="0.1.1",
+    version="0.1.2",
     author="xliiv",
     author_email="tymoteusz.jankowski@gmail.com",
     maintainer="xliiv",
