@@ -16,7 +16,7 @@ before_install:
 deploy:
   skip_cleanup: true
   provider: script
-  script: _pypi_publish.sh
+  script: ./_pypi_publish.sh
   #on:
   #  tags: true
   #  branch: master
