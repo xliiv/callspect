@@ -5,9 +5,6 @@ python:
   - "3.6"
 before_install:
 - sudo apt install p7zip-full
-#- npm install -g bower
-#- bower install
-#- cd callspect/
 cache:
 - pip
 install:
