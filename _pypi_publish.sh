@@ -15,7 +15,7 @@ cd collector/
 echo "coll"
 python setup.py sdist bdist_wheel
 echo "up"
-twine upload --user $TWINE_USERNAME --repository-url $TWINE_REPOSITORY_URL dist/*
+#twine upload --user $TWINE_USERNAME --repository-url $TWINE_REPOSITORY_URL dist/*
 echo "cd"
 cd -
 
@@ -23,6 +23,6 @@ cd -
 echo "cd v"
 cd viewer/
 echo "up"
-twine upload --user $TWINE_USERNAME --repository-url $TWINE_REPOSITORY_URL dist/*
+#twine upload --user $TWINE_USERNAME --repository-url $TWINE_REPOSITORY_URL dist/*
 echo "cd"
 cd -
