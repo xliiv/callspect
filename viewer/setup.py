@@ -21,7 +21,7 @@ setup(
     url="https://github.com/xliiv/callspect",
     python_requires='>=3.5',
     install_requires=[
-        'Flask==0.12.2',
+        'Flask==1.0',
     ],
     packages=['callspect'],
     py_modules=['callspect_cli'],
